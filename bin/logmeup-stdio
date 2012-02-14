@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+var logger = require('logmeup').default;
+var program = require('commander')
+var fs = require('fs')
+
+program
+  .version('0.0.1')
+  .option('-g, --genconfig, Generate config file in the current directory.');
+
+program.parse(process.argv);
+
+if (program.genconfig) {
+  var config = {host: '', port: 7070, collection: '', app: '', autocreate: true}
+
+  program.prompt('host: ', function(host){
+    config.host = host;
+  
+    program.prompt('port: ', Number, function(port){
+      config.port = port;
+    
+      program.prompt('collection: ', function(collection){
+        config.collection = collection;
+      
+        program.prompt('app: ', function(app){
+          config.app = app;
+        
+          program.prompt('Generate "logmeup.json" in current directory?', function(ok){
+            if (ok){
+              console.log(process.cwd());
+              fs.writeFileSync('logmeup.json', JSON.stringify(config, null, ' '));
+              console.log("LogMeUp configuration file generated.");
+              process.exit();
+            } else {
+              console.log("Canceled.");
+              process.exit();
+            }
+
+          });
+        });
+      });
+    });
+  });
+
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+
+  process.stdin.on('data', function(data){
+    data = "<br/>" + data + "<br/>";
+    logger.log(data.replace(/\n/gi,"<br/>"));
+  });
+}
+
+

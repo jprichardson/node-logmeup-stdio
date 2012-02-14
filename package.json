@@ -1,0 +1,24 @@
+{
+  "author": "JP Richardson <jprichardson@gmail.com> (http://gitpilot.com)",
+  "name": "logmeup-stdio",
+  "description": "Pipe all of your apps standard output to LogMeUp.",
+  "version": "0.0.1",
+  "homepage": "http://github.com/jprichardson/node-logmeup-stdio",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jprichardson/node-logmeup-stdio.git"
+  },
+  "engines": {
+    "node": "0.6.x"
+  },
+  "dependencies": {
+    "commander": "0.5.x",
+    "logmeup": "0.0.3"
+  },
+  "devDependencies": {
+    
+  },
+  "bin": {
+    "logmeup-stdio": "./bin/logmeup-stdio"
+  }
+}
